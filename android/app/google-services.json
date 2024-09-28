@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "161038234590",
+    "project_id": "rentalcarapp-a6445",
+    "storage_bucket": "rentalcarapp-a6445.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161038234590:android:155b7a896475ffb66d634f",
+        "android_client_info": {
+          "package_name": "com.example.rentalCarApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbpQoXJgJ_cMOt47kVs1GwZJlA0sp6EnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
