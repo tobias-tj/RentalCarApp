@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_repository/order_repository.dart';
 import 'package:rental_car_app/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:rental_car_app/screens/admin/home/blocs/get_car_admin_bloc/get_car_admin_bloc.dart';
+import 'package:rental_car_app/screens/admin/ventas/blocs/get_all_orders_bloc/get_all_orders_bloc.dart';
 import 'package:rental_car_app/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:rental_car_app/screens/auth/views/welcome_screen.dart';
-import 'package:rental_car_app/screens/calendar/blocs/get_orders_by_user_id_bloc/get_orders_by_user_id_bloc.dart';
 import 'package:rental_car_app/screens/home/blocs/get_car_bloc/get_car_bloc.dart';
+import 'package:rental_car_app/screens/admin/home/views/admin_home_screen.dart';
 import 'package:rental_car_app/screens/home/views/home_screen.dart';
+import 'package:user_repository/user_repository.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});
@@ -16,6 +19,9 @@ class MyAppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<UserRepository>(
+          create: (context) => FirebaseUserRepo(),
+        ),
         RepositoryProvider<CarRepo>(
           create: (context) => FirebaseCarRepo(),
         ),
@@ -81,24 +87,52 @@ class MyAppView extends StatelessWidget {
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) {
             if (state.status == AuthenticationStatus.authenticated) {
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create: (context) => SignInBloc(
-                      context.read<AuthenticationBloc>().userRepository,
+              // Obtenemos el rol del usuario autenticado
+              final String userRole = state.user!.roles;
+
+              // Verificamos si es admin
+              if (userRole == "Admin") {
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => SignInBloc(
+                        context.read<AuthenticationBloc>().userRepository,
+                      ),
                     ),
-                  ),
-                  BlocProvider(
-                    create: (context) =>
-                        GetCarBloc(context.read<CarRepo>())..add(GetCar()),
-                  ),
-                  BlocProvider(
-                    create: (context) =>
-                        GetOrdersByUserIdBloc(context.read<OrderRepo>()),
-                  )
-                ],
-                child: const HomeScreen(),
-              );
+                    BlocProvider(
+                      create: (context) =>
+                          GetCarAdminBloc(context.read<CarRepo>())
+                            ..add(GetCarAdmin()),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          GetAllOrdersBloc(context.read<OrderRepo>())
+                            ..add(GetAllOrders()),
+                    )
+                  ],
+                  child: const AdminHomeScreen(),
+                );
+              } else {
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => SignInBloc(
+                        context.read<AuthenticationBloc>().userRepository,
+                      ),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          GetCarBloc(context.read<CarRepo>())..add(GetCar()),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          GetAllOrdersBloc(context.read<OrderRepo>())
+                            ..add(GetAllOrders()),
+                    )
+                  ],
+                  child: const HomeScreen(),
+                );
+              }
             } else {
               return const WelcomeScreen();
             }
