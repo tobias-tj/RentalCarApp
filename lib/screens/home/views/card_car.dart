@@ -350,7 +350,11 @@ class _CardCarState extends State<CardCar> {
               // Botón para seleccionar el rango de fechas
               ElevatedButton(
                 onPressed: () {
-                  _openRangeScreen(); // Llamada al método para seleccionar fechas
+                  widget.isPublish
+                      ? {
+                          _openRangeScreen() // Llamada al método para seleccionar fechas
+                        }
+                      : null;
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.background,
@@ -375,7 +379,7 @@ class _CardCarState extends State<CardCar> {
                   Flexible(
                     child: ElevatedButton(
                       onPressed: () {
-                        _createProcessOrder();
+                        widget.isPublish ? {_createProcessOrder()} : null;
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:

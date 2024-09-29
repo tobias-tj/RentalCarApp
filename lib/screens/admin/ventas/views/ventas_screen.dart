@@ -110,7 +110,17 @@ class VentasScreen extends StatelessWidget {
                                 (name) => name.hashCode == value,
                                 orElse: () => '',
                               );
-                              return Text(carName);
+                              // Limitamis el maximo de caracteres a 10
+                              final truncatedName = carName.length > 8
+                                  ? '${carName.substring(0, 8)}...'
+                                  : carName;
+                              return Text(
+                                truncatedName,
+                                style: TextStyle(fontSize: 11),
+                                softWrap: true,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              );
                             },
                           ),
                         ),
@@ -135,28 +145,6 @@ class VentasScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 20),
-
-                // Texto para el vehiculo con mayor ingreso
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white
-                          .withOpacity(0.8), // Fondo semi-transparente
-                      borderRadius:
-                          BorderRadius.circular(8.0), // Bordes redondeados
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(
-                              0, 3), // Sombra debajo del contenedor
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
 
                 // Boton para generar PDF
                 ElevatedButton(
