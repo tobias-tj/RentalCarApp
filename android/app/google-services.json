@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:161038234590:android:155b7a896475ffb66d634f",
+        "mobilesdk_app_id": "1:161038234590:android:82eae0f3704beefb6d634f",
         "android_client_info": {
-          "package_name": "com.example.rentalCarApp"
+          "package_name": "com.example.rental_car_app"
         }
       },
       "oauth_client": [],
