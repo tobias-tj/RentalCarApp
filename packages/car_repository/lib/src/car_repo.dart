@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:car_repository/src/models/car.dart';
 
 abstract class CarRepo {
@@ -6,4 +8,6 @@ abstract class CarRepo {
   Future<void> updateCar(Car car);
   Future<void> deleteCar(String carId);
   Future<Car?> getCarById(String carId);
+  Future<String> uploadImage(File imageFile, String carId);
+  Future<void> updateCarPublishState(String carId, bool isPublish);
 }

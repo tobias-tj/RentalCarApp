@@ -15,12 +15,14 @@ dependencies:
   equatable: ^2.0.5
   firebase_auth: ^5.2.1
   firebase_core: ^3.4.0
+  firebase_storage: ^12.3.2
   fl_chart: ^0.69.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_date_range_picker: ^0.1.1
   flutter_stripe: ^11.0.0
+  image_picker: ^1.1.2
   intl: ^0.19.0
   lucide_icons: ^0.257.0
   order_repository:

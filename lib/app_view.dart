@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_repository/order_repository.dart';
 import 'package:rental_car_app/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:rental_car_app/screens/admin/create/blocs/create_car/create_car_bloc.dart';
 import 'package:rental_car_app/screens/admin/home/blocs/get_car_admin_bloc/get_car_admin_bloc.dart';
+import 'package:rental_car_app/screens/admin/home/blocs/update_car_status_bloc/update_car_status_bloc.dart';
 import 'package:rental_car_app/screens/admin/ventas/blocs/get_all_orders_bloc/get_all_orders_bloc.dart';
 import 'package:rental_car_app/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:rental_car_app/screens/auth/views/welcome_screen.dart';
@@ -108,7 +110,14 @@ class MyAppView extends StatelessWidget {
                       create: (context) =>
                           GetAllOrdersBloc(context.read<OrderRepo>())
                             ..add(GetAllOrders()),
-                    )
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          CreateCarBloc(context.read<CarRepo>()),
+                    ),
+                    BlocProvider(
+                        create: (context) =>
+                            UpdateCarStatusBloc(context.read<CarRepo>()))
                   ],
                   child: const AdminHomeScreen(),
                 );

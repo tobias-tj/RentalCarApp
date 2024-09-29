@@ -12,6 +12,7 @@ class CardCar extends StatelessWidget {
   final String people;
   final String engine;
   final String cv;
+  final VoidCallback onTogglePublish;
   const CardCar(
       {Key? key,
       required this.id,
@@ -23,7 +24,8 @@ class CardCar extends StatelessWidget {
       required this.transmission,
       required this.people,
       required this.engine,
-      required this.cv})
+      required this.cv,
+      required this.onTogglePublish})
       : super(key: key);
 
   @override
@@ -205,6 +207,23 @@ class CardCar extends StatelessWidget {
         ),
         const SizedBox(
           height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Estado:"),
+              Switch(
+                value: isPublish,
+                onChanged: (value) {
+                  onTogglePublish();
+                },
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.redAccent,
+              ),
+            ],
+          ),
         ),
       ],
     );
