@@ -37,7 +37,7 @@ class AdminAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge
-                ?.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
+                ?.copyWith(fontWeight: FontWeight.bold, fontSize: 18),
           )
         ],
       ),

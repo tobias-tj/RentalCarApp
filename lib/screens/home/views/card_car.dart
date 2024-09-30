@@ -159,7 +159,26 @@ class _CardCarState extends State<CardCar> {
       updatedAt: now,
     );
 
-    StripeService.instance.makePayment(order, emailUser!);
+    try {
+      // Llamada al servicio de Stripe
+      await StripeService.instance.makePayment(order, emailUser!);
+
+      // Mostrar mensaje de éxito cuando la reserva fue realizada correctamente
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Reserva realizada con éxito!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      // Mostrar mensaje de error en caso de que ocurra un fallo
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error al realizar la reserva: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override

@@ -19,8 +19,9 @@ class PasswordValidationChecklist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Wrap(
+      spacing: 16.0, // Espacio entre los elementos
+      runSpacing: 8.0,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,11 +38,6 @@ class PasswordValidationChecklist extends StatelessWidget {
               text: "1 number",
               isChecked: containsNumber,
             ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
             ChecklistItem(
               text: "1 special character",
               isChecked: containsSpecialChar,

@@ -39,7 +39,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
-                      childAspectRatio: 5 / 10,
+                      childAspectRatio: 4 / 10,
                     ),
                     itemCount: state.cars.length,
                     itemBuilder: (context, int i) {
